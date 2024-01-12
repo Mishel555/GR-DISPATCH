@@ -1,0 +1,65 @@
+#!groovy
+
+pipeline {
+
+    options {
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+    }
+
+    agent { label 'NodeJS' }
+
+    stages {
+        stage ("Build") {
+            steps {
+                script {
+                    sh "npm install"
+                    sh "npm run build"
+                }
+            }
+        }
+
+        stage ("Pack and Nexus") {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'nexus-upload', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh '''echo '
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+ <servers>
+      <server>
+      <id>nexus</id>
+      <username>''' + USERNAME + '''</username>
+      <password>''' + PASSWORD + '''</password>
+    </server>
+  </servers>
+</settings>
+' > ./settings.xml'''
+                    }
+                    def now = new Date()
+                    version = now.format("yyyyMMddHHmm", TimeZone.getTimeZone('UTC'))
+                    sh "cd build && zip -r web-client.zip *"
+                    sh "mvn deploy:deploy-file -B -s settings.xml -DgroupId=ru.agweb.restaurant -DartifactId=gr-dispatcher-web-client -Dversion=$version -Dpackaging=zip -Dfile=build/web-client.zip -DgeneratePom=true -DrepositoryId=nexus -Durl=https://nexus.grdispatch.com/repository/gr-dispatcher-web-client/"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                slackSend(channel: "jenkins-web-client", color: "good", message: "[<${env.BUILD_URL}|${env.BUILD_NUMBER}>] *GR-Dispatch-Web-Client* SUCCESS\nBranch: ${env.GIT_BRANCH}\nBuild: ${version}")
+            }
+        }
+
+        failure {
+            script {
+                slackSend(channel: "jenkins-web-client", color: "bad", message: "[<${env.BUILD_URL}|${env.BUILD_NUMBER}>] *GR-Dispatch-Web-Client* FAILED\nBrach: ${env.GIT_BRANCH}")
+            }
+        }
+
+        cleanup {
+            cleanWs()
+        }
+    }
+}

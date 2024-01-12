@@ -1,0 +1,34 @@
+@use '@styles/colors.scss';
+
+// Override antd styles
+.businessLogTable {
+  min-width: 450px;
+
+  .ant-table {}
+
+  .ant-table-row {
+    &:nth-child(even) {
+      background-color: colors.$GREY_EXTRA_LIGHT;
+    }
+
+    &:hover {
+      background-color: rgba(colors.$CYAN, 0.3);
+    }
+  }
+
+  .ant-table-cell {
+    border-bottom: none;
+    background-color: initial !important;
+  }
+
+  th.ant-table-cell {
+    margin-top: 10px;
+    padding: 10px 10px 0 !important;
+    border-bottom: none !important;
+    background-color: colors.$GREY_EXTRA_LIGHT !important;
+  }
+
+  td.ant-table-cell {
+    padding: 0 !important;
+  }
+}

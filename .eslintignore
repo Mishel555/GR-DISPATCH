@@ -1,0 +1,9 @@
+__tests__
+__mocks__
+public
+dist
+build
+node_modules
+webpack.*
+babel.config.js
+craco.config.js

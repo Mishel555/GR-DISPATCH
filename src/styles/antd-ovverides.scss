@@ -1,0 +1,128 @@
+@use '@styles/colors';
+
+/* === ANTD TIME PICKER === */
+.ant-picker-time-panel {
+  .ant-picker-time-panel-cell {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .ant-picker-time-panel-cell-inner {
+    padding: 0 0 0 14px;
+    border-radius: 0 !important;
+
+    font-size: 10px;
+    text-align: left;
+    color: colors.$GREY_LIGHT !important;
+  }
+
+  .ant-picker-time-panel-cell-selected {
+    .ant-picker-time-panel-cell-inner {
+      width: 100% !important;
+      background: rgba(colors.$CYAN, 0.2) !important;
+    }
+  }
+}
+
+.ant-picker-footer {
+  .ant-picker-now-btn {
+    font-size: 10px !important;
+    color: colors.$CYAN !important;
+  }
+
+  .ant-picker-ok {
+    button {
+      width: 30px;
+      height: 30px;
+      font-size: 10px;
+      border-radius: 12px;
+      color: colors.$WHITE;
+      background-color: colors.$CYAN;
+
+      &:hover {
+        opacity: .8;
+        background-color: colors.$CYAN;
+      }
+    }
+  }
+}
+
+/* === ANTD TIME PICKER === */
+
+/* === ANTD DATE PICKER === */
+.ant-picker-dropdown {
+  .ant-picker-cell-inner {
+    &:before {
+      border-color: colors.$CYAN !important;
+    }
+  }
+
+  .ant-picker-cell-selected {
+    .ant-picker-cell-inner {
+      background-color: colors.$CYAN !important;
+    }
+  }
+
+  .ant-picker-today-btn {
+    color: colors.$CYAN;
+
+    &:hover {
+      color: colors.$CYAN_DARK;
+    }
+  }
+}
+
+/* === ANTD DATE PICKER === */
+
+/* === ANTD RANGE PICKER === */
+.ant-picker-date-range-wrapper {
+  .ant-picker-cell-inner {
+    &:before {
+      border-color: colors.$CYAN !important;
+    }
+  }
+
+  .ant-picker-cell-selected, .ant-picker-cell-range-start-single, .ant-picker-cell-range-start, .ant-picker-cell-range-end {
+    .ant-picker-cell-inner {
+      background-color: colors.$CYAN !important;
+    }
+  }
+
+  .ant-picker-cell-in-range {
+    &::before {
+      background-color: rgba(colors.$CYAN, 0.2) !important;
+    }
+  }
+
+  .ant-picker-cell-selected, .ant-picker-cell-range-hover-end {
+    &::after {
+      background-color: rgba(colors.$CYAN, 0.2) !important;
+    }
+  }
+
+  .ant-picker-cell-range-hover-start {
+    &::before {
+      background-color: rgba(colors.$CYAN, 0.2) !important;
+    }
+  }
+
+  .ant-picker-cell-range-hover, .ant-picker-cell-range-hover-start, .ant-picker-cell-range-hover-end {
+    &::after {
+      border-color: colors.$CYAN !important;
+    }
+  }
+
+  .ant-picker-cell-range-hover-start, .ant-picker-cell-range-hover-end {
+    .ant-picker-cell-inner {
+      &::before {
+        background-color: rgba(colors.$CYAN, 0.2) !important;
+      }
+
+      &::after {
+        background-color: rgba(colors.$CYAN, 0.2) !important;
+      }
+    }
+  }
+}
+
+/* === ANTD RANGE PICKER === */

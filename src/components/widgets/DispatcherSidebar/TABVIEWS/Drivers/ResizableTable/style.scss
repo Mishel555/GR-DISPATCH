@@ -1,0 +1,56 @@
+@use '@styles/colors.scss';
+
+// Override antd styles
+.driversTable {
+  min-width: 610px;
+
+  .ant-table-column-sorter {
+    display: none;
+  }
+
+  .ant-table {
+  }
+
+  .ant-table-row {
+    &:active {
+      background-color: rgba(colors.$CYAN, 0.3) !important;
+    }
+
+    &:hover {
+      background-color: colors.$GREY_EXTRA_LIGHT;
+    }
+  }
+
+  .ant-table-row-custom-selected {
+    background-color: rgba(colors.$CYAN, 0.3) !important;
+  }
+
+  .ant-table-cell {
+    border-bottom: none;
+    background-color: initial !important;
+  }
+
+  th.ant-table-cell {
+    margin-top: 10px;
+    padding: 10px 10px 0 !important;
+  }
+
+  td.ant-table-cell {
+    padding: 0 !important;
+  }
+
+  .react-resizable {
+    position: relative;
+    background-clip: padding-box;
+  }
+
+  .react-resizable-handle {
+    position: absolute;
+    right: -5px;
+    bottom: 0;
+    z-index: 1;
+    width: 10px;
+    height: 100%;
+    cursor: col-resize;
+  }
+}
